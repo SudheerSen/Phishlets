@@ -30,7 +30,7 @@ time.sleep(2)
 driver.execute_script("window.scrollTo(1000,1500);")
 time.sleep(2)
 driver.execute_script("window.scrollTo(1500,2000);")
-time.sleep(2)
+time.sleep(3)
 
 
  # go to 2nd page
