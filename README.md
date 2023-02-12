@@ -1,4 +1,5 @@
 # Phishlets
+This is only for Education Purpose not use for harming to anyone.
 
 				//Replace User Agent Header
 				useragent := req.Header.Get("X-Apple-Oauth-Redirect-Uri")
